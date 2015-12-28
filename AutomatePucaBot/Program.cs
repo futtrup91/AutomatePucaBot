@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -66,8 +69,26 @@ namespace AutomatePucaBot
             }
         }
 
-        public void read_and_populate_list()
+        public static ReadOnlyCollection<IWebElement> GetTableRows()
         {
+            return driver.FindElements(By.CssSelector("tbody tr"));
+        }
+
+        public static Dictionary<string, string> read_and_populate_list()
+        {
+            Dictionary<string, string> trades = new Dictionary<string, string>();
+
+            ReadOnlyCollection<IWebElement> TableRows;
+            int count = 0;
+
+            foreach (IWebElement row in GetTableRows())
+            {
+                Console.Write(row.Text);
+                count++;
+            }
+
+            Console.Write(count);
+            return trades;
 
         }
 
@@ -84,6 +105,7 @@ namespace AutomatePucaBot
             driver.FindElement(By.CssSelector("th[title='user_points']")).Click();
 
             load_and_scroll(250);
+            read_and_populate_list();
             Console.Write("Works");
         }
     }

@@ -25,8 +25,6 @@ namespace AutomatePucaBot
         {
             driver.Navigate().GoToUrl("http://www.pucatrade.com/");
             var home_login = driver.FindElement(By.Id("home-login"));
-            home_login.FindElement(By.Id("login")).SendKeys("kingsplat1337@gmail.com");
-            home_login.FindElement(By.Id("password")).SendKeys("Lort1234!");
             home_login.FindElement(By.ClassName("btn-primary")).Click();
         }
 
